@@ -1,0 +1,31 @@
+\\*
+en_block.each do |sqnce,num|
+  if num  > he_block[sqnce]
+    total_num=num
+  end
+end
+
+file_e.lines.each do |line|
+   start_seq=0
+   stop_seq=0
+  file_h.lines.each do |h_line|
+    if (h_line.start_time.to_i - line.start_time.to_i) <  line.start_time.to_i*0.1
+      start_seq = h_line.sequence
+    end 
+    if (h_line.end_time.to_i - line.end_time.to_i) <  line.end_time.to_i*0.1
+      stop_seq = h_line.sequence
+    end
+  end
+  puts line.text
+    (start_seq..stop_seq).each do |seq|
+       file_h.lines[seq-1].text.each do |to_e|
+        puts to_e.force_encoding("ISO-8859-8").encode("UTF-8")
+      end
+    end
+
+#   file_h.lines[line.sequence].text.each do |txt|
+#     puts txt.force_encoding("ISO-8859-8").encode("UTF-8")
+#   end
+ #
+end
+*//
