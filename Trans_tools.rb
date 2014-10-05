@@ -37,17 +37,28 @@ class Tobject
       end
      } 
   end
-  
+   def delete_blocks_ni(seq)
+    @srt.lines.each { |line|
+      if line.sequence < seq
+       @srt.lines.delete_at(get_index_from_seq(line.sequence))
+      elsif line.sequence > seq
+        break
+      end
+     } 
+  end
  def get_closest_start_time(starttime)
    @srt.lines.each {|line|
       return line.sequence if ((line.start_time < starttime*1.1) && (line.start_time > starttime*0.9))
      }
+     return nil
  end
  
  def get_common_ground(object)
    @srt.lines.each {|line|
-     return line.sequence if object.get_closest_start_time(line.start_time)
+     obj_seq = object.get_closest_start_time(line.start_time)
+     return line.sequence,obj_seq if obj_seq
      }
+     return -1
  end
  
 end
